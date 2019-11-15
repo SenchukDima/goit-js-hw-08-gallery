@@ -76,6 +76,8 @@ const createImage = (item, parent) => {
   function onCloseHandler(element) {
     if(element.target.nodeName === "I" || element.target.nodeName === "BUTTON") {
       lightbox.classList.remove('is-open');
+      lightbox.querySelector('.lightbox__image').src = '';
+      lightbox.querySelector('.lightbox__image').alt = '';
     }
   }
   
