@@ -63,16 +63,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 56px;
+  height: 56px;
+  color: #fff;
   cursor: pointer;
   transition: opacity 200ms linear;
   opacity: 0;
   pointer-events: none;
-
 }
 .gallery__icon i {
-  width: 36px;
-  height: 36px;
-  background-image: url('./icon/fullScreen.svg');
+  font-size: 48px;
 }
 
 .gallery__item:hover .gallery__icon {

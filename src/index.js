@@ -5,64 +5,33 @@ const galleryList = document.querySelector('ul.js-gallery');
 const lightbox = document.querySelector('.js-lightbox');
 const btn = document.querySelector('[data-action="close-lightbox"]')
   
-const createImage = (item, parent) => {
-    const { preview, original, description } = item;
-    const img = document.createElement('img');
-    
-    img.classList.add('gallery__image');
-    img.dataset.source = original;
-    img.src = preview;
-    img.alt = description;
-    
-    parent.appendChild(img);
-  };
+function buildGalleryItems(item) {
+  return `<li class="gallery__item">
+  <a
+    class="gallery__link"
+    href="${item.original}"
+  >
+    <img
+      class="gallery__image"
+      src="${item.preview}"
+      data-source="${item.original}"
+      alt="${item.description}"
+    />
 
-  const createLink = (item, parent) => {
-    const { original } = item;
-    const a = document.createElement('a');
+    <span class="gallery__icon">
+      <i class="material-icons">zoom_out_map</i>
+    </span>
+  </a>
+</li>`
+};
 
-    a.classList.add('gallery__link');
-    a.href = original;
+const buildGallery = function(parent, array) {
+  const items = array.map( (item) => buildGalleryItems(item)).join('');
+  parent.insertAdjacentHTML('beforeend', items)
+};
 
-    
-    createImage(item, a);
-    
-    parent.appendChild(a);
-  };
+buildGallery(galleryList, galleryItems);
 
-  const createI = (parent) => {
-    const i = document.createElement('i');
-    parent.appendChild(i);
-    };
-
-  const createDiv = (parent) => {
-    const div = document.createElement('div');
-    div.classList.add('gallery__icon');
-    parent.appendChild(div);
-
-    createI(div);
-
-    };
-  
-  const createItem = (item) => {
-    const li = document.createElement('li');
-    li.classList.add('gallery__item');
-    
-    createLink(item, li);
-
-    createDiv(li);
-    
-    return li;
-  };
-  
-  const renderListItems = (array) => {
-    const items = array.map( (item) => createItem(item));
-
-    galleryList.append(...items);
-  };
-  
-  renderListItems(galleryItems);
-  
   function onClickHandler(element) {
     element.preventDefault();
     
